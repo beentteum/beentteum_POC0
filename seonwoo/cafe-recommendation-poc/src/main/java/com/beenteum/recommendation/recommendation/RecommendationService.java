@@ -27,10 +27,6 @@ public class RecommendationService {
 
         for (Cafe cafe : cafes) {
 
-            if (!matchesRequiredConditions(cafe, request)) {
-                continue;
-            }
-
             List<String> reasons = new ArrayList<>();
 
             int score = calculateScore(
@@ -72,30 +68,6 @@ public class RecommendationService {
                     "방문 목적을 선택해야 합니다."
             );
         }
-    }
-
-    private boolean matchesRequiredConditions(
-            Cafe cafe,
-            RecommendationRequest request
-    ) {
-
-        if (request.isNeedOutlet()
-                && !cafe.hasOutlet()) {
-            return false;
-        }
-
-        if (request.isNeedWifi()
-                && !cafe.hasWifi()) {
-            return false;
-        }
-
-        if (request.getPreferredNoise() != null
-                && cafe.getNoiseLevel()
-                != request.getPreferredNoise()) {
-            return false;
-        }
-
-        return true;
     }
 
     private int calculateScore(
@@ -152,20 +124,31 @@ public class RecommendationService {
             }
         }
 
-        if (request.isNeedOutlet()
-                && cafe.hasOutlet()) {
-            score += 1;
+        if (request.isNeedOutlet()) {
+            if (cafe.hasOutlet()) {
+                score += 1;
+                reasons.add("요청한 콘센트 조건 충족");
+            } else {
+                score -= 1;
+            }
         }
 
-        if (request.isNeedWifi()
-                && cafe.hasWifi()) {
-            score += 1;
+        if (request.isNeedWifi()) {
+            if (cafe.hasWifi()) {
+                score += 1;
+                reasons.add("요청한 와이파이 조건 충족");
+            } else {
+                score -= 1;
+            }
         }
 
-        if (request.getPreferredNoise() != null
-                && cafe.getNoiseLevel()
-                == request.getPreferredNoise()) {
-            score += 1;
+        if (request.getPreferredNoise() != null) {
+            if (cafe.getNoiseLevel() == request.getPreferredNoise()) {
+                score += 1;
+                reasons.add("선호 소음 수준 일치");
+            } else {
+                score -= 1;
+            }
         }
 
         return score;

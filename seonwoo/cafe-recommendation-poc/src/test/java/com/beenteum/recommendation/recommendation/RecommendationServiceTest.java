@@ -13,7 +13,7 @@ class RecommendationServiceTest {
             new RecommendationService();
 
     @Test
-    void 공부목적_조건에_맞는_카페를_추천한다() {
+    void 공부목적_추천점수가_높은_카페를_우선추천한다() {
 
         RecommendationRequest request =
                 new RecommendationRequest(
@@ -26,13 +26,21 @@ class RecommendationServiceTest {
         List<RecommendationResponse> result =
                 recommendationService.recommend(request);
 
-        assertEquals(1, result.size());
-        assertEquals("빈틈 카페", result.get(0).getCafeName());
-        assertEquals(7, result.get(0).getScore());
+        assertEquals(3, result.size());
+
+        assertEquals(
+                "빈틈 카페",
+                result.get(0).getCafeName()
+        );
+
+        assertEquals(
+                7,
+                result.get(0).getScore()
+        );
     }
 
     @Test
-    void 대화목적_조건에_맞는_카페를_추천한다() {
+    void 대화목적_추천점수가_높은_카페를_우선추천한다() {
 
         RecommendationRequest request =
                 new RecommendationRequest(
@@ -45,8 +53,42 @@ class RecommendationServiceTest {
         List<RecommendationResponse> result =
                 recommendationService.recommend(request);
 
-        assertEquals(1, result.size());
-        assertEquals("캠퍼스 카페", result.get(0).getCafeName());
+        assertEquals(3, result.size());
+
+        assertEquals(
+                "캠퍼스 카페",
+                result.get(0).getCafeName()
+        );
+
+        assertEquals(
+                4,
+                result.get(0).getScore()
+        );
+    }
+
+    @Test
+    void 일부조건을_충족하지_못한_카페도_추천결과에_포함한다() {
+
+        RecommendationRequest request =
+                new RecommendationRequest(
+                        Purpose.STUDY,
+                        true,
+                        true,
+                        NoiseLevel.LOW
+                );
+
+        List<RecommendationResponse> result =
+                recommendationService.recommend(request);
+
+        boolean containsLoungeCafe =
+                result.stream()
+                        .anyMatch(
+                                response ->
+                                        response.getCafeName()
+                                                .equals("라운지 카페")
+                        );
+
+        assertTrue(containsLoungeCafe);
     }
 
     @Test
