@@ -1,0 +1,32 @@
+POST http://localhost:8081/api/recommendations
+Content-Type: application/json
+
+{
+  "purpose": "STUDY",
+  "needOutlet": true,
+  "needWifi": true,
+  "preferredNoise": "LOW"
+}
+###
+
+POST http://localhost:8081/api/recommendations
+Content-Type: application/json
+
+{
+  "purpose": "TALK",
+  "needOutlet": false,
+  "needWifi": true,
+  "preferredNoise": "MEDIUM"
+}
+
+###
+
+POST http://localhost:8081/api/recommendations
+Content-Type: application/json
+
+{
+  "purpose": null,
+  "needOutlet": true,
+  "needWifi": true,
+  "preferredNoise": "LOW"
+}
