@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:ital,wght@0,600;1,600&display=swap');
+
+:root {
+    --ink: #24302b;
+    --muted: #748078;
+    --paper: #f5f3ed;
+    --card: #fffdf8;
+    --line: #d9ded6;
+    --accent: #d7643f;
+    --accent-dark: #ae472b;
+    --sage: #b6c9b2;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; color: var(--ink); background: radial-gradient(circle at 80% 0%, #dce8d7 0, transparent 31rem), var(--paper); font-family: 'DM Sans', sans-serif; }
+.page-shell { width: min(960px, calc(100% - 40px)); margin: 0 auto; padding: 64px 0 80px; }
+.hero { max-width: 660px; margin-bottom: 52px; }
+.eyebrow { margin: 0 0 14px; color: var(--accent-dark); font-size: 11px; font-weight: 700; letter-spacing: 2px; }
+h1, h2, p { margin-top: 0; }
+h1 { margin-bottom: 18px; font-size: clamp(42px, 7vw, 76px); line-height: .98; letter-spacing: -2px; }
+h1 em, h2 { font-family: 'Playfair Display', serif; font-weight: 600; }
+h1 em { color: var(--accent); }
+.hero-copy { color: var(--muted); font-size: 16px; }
+.control-panel { display: flex; align-items: center; gap: 14px; margin-bottom: 66px; padding: 16px 20px; border: 1px solid var(--line); background: rgba(255, 253, 248, .72); }
+label { font-size: 13px; font-weight: 700; }
+input { width: 92px; padding: 10px 12px; border: 1px solid var(--line); color: var(--ink); background: var(--card); font: inherit; }
+.hint { color: var(--muted); font-size: 12px; }
+.section-heading { display: flex; align-items: end; justify-content: space-between; margin-bottom: 20px; border-bottom: 1px solid var(--line); }
+h2 { margin-bottom: 16px; font-size: 34px; }
+.result { min-height: 24px; margin-bottom: 16px; color: var(--accent-dark); font-size: 13px; font-weight: 700; }
+.cafe-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.cafe-card { min-height: 214px; display: flex; flex-direction: column; justify-content: space-between; padding: 22px; border: 1px solid var(--line); background: var(--card); transition: transform .2s ease, box-shadow .2s ease; }
+.cafe-card:hover { transform: translateY(-4px); box-shadow: 8px 10px 0 var(--sage); }
+.cafe-number { color: var(--accent); font-size: 12px; font-weight: 700; }
+.cafe-card h3 { margin: 18px 0 8px; font-family: 'Playfair Display', serif; font-size: 27px; }
+.address { color: var(--muted); font-size: 13px; line-height: 1.5; }
+button { width: 100%; padding: 12px 14px; border: 1px solid var(--accent); color: var(--card); background: var(--accent); cursor: pointer; font: inherit; font-weight: 700; }
+button:hover { background: var(--accent-dark); }
+button:disabled { border-color: var(--line); color: var(--muted); background: var(--line); cursor: wait; }
+@media (max-width: 700px) { .page-shell { padding-top: 40px; } .cafe-list { grid-template-columns: 1fr; } .control-panel { align-items: flex-start; flex-wrap: wrap; } .section-heading { align-items: flex-start; flex-direction: column; } }
