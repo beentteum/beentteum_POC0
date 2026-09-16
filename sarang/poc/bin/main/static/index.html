@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>카페 즐겨찾기</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<main class="page-shell">
+    <header class="hero">
+        <p class="eyebrow">CAFE COLLECTION</p>
+        <h1>오늘의 카페를<br><em>즐겨찾기</em>에 담아보세요.</h1>
+        <p class="hero-copy">마음에 드는 공간을 골라 나만의 카페 목록을 만들어보세요.</p>
+    </header>
+
+    <section class="control-panel" aria-label="사용자 선택">
+        <label for="user-id">사용자 ID</label>
+        <input id="user-id" type="number" min="1" value="1">
+        <span class="hint">테스트 사용자: 1, 2</span>
+    </section>
+
+    <section>
+        <div class="section-heading">
+            <div>
+                <p class="eyebrow">NEARBY PICKS</p>
+                <h2>카페 목록</h2>
+            </div>
+            <span id="result" class="result" aria-live="polite"></span>
+        </div>
+        <div id="cafe-list" class="cafe-list" aria-live="polite"></div>
+    </section>
+</main>
+<script src="/app.js"></script>
+</body>
+</html>
